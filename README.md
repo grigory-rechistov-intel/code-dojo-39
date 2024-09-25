@@ -10,7 +10,7 @@ Similarly a [Ruby](https://www.ruby-lang.org/en/) version can be found in the [r
 
 A [Python](https://www.python.org/) version can be found in the [python](python) folder; produce the song with:
 
-	python song.py
+	python3 song.py
 
 A [Java](https://www.java.com/) version can be found in the [java](java) folder; produce the song with:
 
