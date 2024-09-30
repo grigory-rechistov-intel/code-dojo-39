@@ -19,6 +19,7 @@ class Animal {
         return res + intro_punctuation + '\n';
     }
     virtual const std::string verse_comment() = 0;
+    virtual const std::string verse_conclusion() = 0;
 };
 
 class StartingAnimal: public Animal {
@@ -27,6 +28,9 @@ class StartingAnimal: public Animal {
         intro_punctuation = ".";
     }
     virtual const std::string verse_comment() {
+        return "";
+    }
+    virtual const std::string verse_conclusion() {
         return "";
     }
 };
@@ -39,6 +43,9 @@ class RescueAnimal: public Animal {
     virtual const std::string verse_comment() {
         return comment;
     }
+    virtual const std::string verse_conclusion() {
+        return "";
+    }
 };
 
 class LethalAnimal: public Animal {
@@ -49,17 +56,10 @@ class LethalAnimal: public Animal {
     virtual const std::string verse_comment() {
         return "";
     }
-};
-
-const std::string verse_conclusion(const std::string &animal,
-                              const std::vector<std::string> &animal_names) {
-    const std::string death_line = "...She's dead, of course!";
-
-    if (animal == animal_names.back()) {
-        return death_line;
+    virtual const std::string verse_conclusion() {
+        return "...She's dead, of course!";
     }
-    return "";
-}
+};
 
 const std::string rescue_attempts(const std::vector<std::string> &animal_names,
                               size_t depth)
@@ -108,37 +108,37 @@ const std::string get_verse(size_t n)
             animals[0]->verse_intro() +
             animals[0]->verse_comment() +
             rescue_attempts(animal_names, 0) +
-            verse_conclusion("fly", animal_names),
+            animals[0]->verse_conclusion(),
 
             animals[1]->verse_intro() +
             animals[1]->verse_comment() +
             rescue_attempts(animal_names, 1) +
-            verse_conclusion("fly", animal_names),
+            animals[1]->verse_conclusion(),
 
             animals[2]->verse_intro() +
             animals[2]->verse_comment() +
             rescue_attempts(animal_names, 2) +
-            verse_conclusion("fly", animal_names),
+            animals[2]->verse_conclusion(),
 
             animals[3]->verse_intro() +
             animals[3]->verse_comment() +
             rescue_attempts(animal_names, 3) +
-            verse_conclusion("fly", animal_names),
+            animals[3]->verse_conclusion(),
 
             animals[4]->verse_intro() +
             animals[4]->verse_comment() +
             rescue_attempts(animal_names, 4) +
-            verse_conclusion("fly", animal_names),
+            animals[4]->verse_conclusion(),
 
             animals[5]->verse_intro() +
             animals[5]->verse_comment() +
             rescue_attempts(animal_names, 5) +
-            verse_conclusion("fly", animal_names),
+            animals[5]->verse_conclusion(),
 
             animals[6]->verse_intro() +
             animals[6]->verse_comment() +
             rescue_attempts(animal_names, 6) +
-            verse_conclusion("horse", animal_names)
+            animals[6]->verse_conclusion(),
     };
 
     assert(animal_names.size() == verses.size());
