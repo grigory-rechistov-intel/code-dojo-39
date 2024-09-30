@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "lib.h"
 
 int main() {
 	std::string song = "There was an old lady who swallowed a fly.\n" \
