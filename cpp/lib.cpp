@@ -51,6 +51,11 @@ const std::string rescue_attempts(const std::vector<std::string> &animal_names,
     if (depth == 0) {
         return "";
     }
+
+    if (depth >= animal_names.size() - 1) {
+        return "";
+    }
+
     const auto &inner = animal_names[depth - 1];
     const auto &outer = animal_names[depth];
 
@@ -102,6 +107,7 @@ const std::string get_verse(size_t n)
 
             verse_intro("horse", animal_names) +
             verse_comment("horse") +
+            rescue_attempts(animal_names, 6) +
             verse_conclusion("horse", animal_names)
     };
 
