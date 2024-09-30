@@ -5,10 +5,10 @@
 class Animal {
     protected:
     std::string name;
+    std::string intro_punctuation;
     public:
     const std::string get_name() const {return name;}
     Animal() = delete;
-    std::string intro_punctuation;
     Animal(const std::string _name) {
         name = _name;
         intro_punctuation = ";";
