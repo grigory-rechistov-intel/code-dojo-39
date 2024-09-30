@@ -4,10 +4,10 @@
 #include <cassert>
 #include <map>
 
-const std::string lady_intro = "There was an old lady who swallowed";
 
 const std::string verse_intro(const std::string &animal,
                               const std::vector<std::string> &animal_names) {
+    const std::string lady_intro = "There was an old lady who swallowed";
     std::string res = std::format("{} a {}", lady_intro, animal);
     std::string punctuation = ";";
     if (animal == animal_names.front()) {
