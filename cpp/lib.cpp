@@ -23,14 +23,7 @@ class Animal {
     virtual const std::string reason_to_swallow(const Animal *prey) = 0;
     virtual const std::string separator() {return ",\n";}
 
-    virtual const std::string swallow_sequence(const std::vector<Animal *> animals, size_t depth) {
-        auto prey = depth > 0? animals.at(depth - 1): nullptr;
-
-        auto line = reason_to_swallow(prey);
-
-        std::string separator = prey->separator();
-        return line + separator + prey->swallow_sequence(animals, depth-1);
-    }
+    virtual const std::string swallow_sequence(const std::vector<Animal *> animals, size_t depth) = 0;
 };
 
 class StartingAnimal: public Animal {
@@ -70,6 +63,14 @@ class RescueAnimal: public Animal {
     }
     virtual const std::string reason_to_swallow(const Animal *prey) {
         return std::format("She swallowed the {} to catch the {}", name, prey->get_name());
+    }
+    virtual const std::string swallow_sequence(const std::vector<Animal *> animals, size_t depth) {
+        auto prey = depth > 0? animals.at(depth - 1): nullptr;
+
+        auto line = reason_to_swallow(prey);
+
+        std::string separator = prey->separator();
+        return line + separator + prey->swallow_sequence(animals, depth-1);
     }
 
 };
