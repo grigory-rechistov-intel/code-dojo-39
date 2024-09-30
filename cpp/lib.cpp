@@ -16,7 +16,7 @@ class Animal {
         name = _name;
         intro_punctuation = ";";
     }
-    const std::string verse_intro() {
+    virtual const std::string verse_intro() {
         const std::string lady_intro = "There was an old lady who swallowed";
         std::string res = std::format("{} a {}", lady_intro, name);
         return res + intro_punctuation + '\n';
@@ -103,6 +103,9 @@ class LethalAnimal: public Animal {
 class NullAnimal: public Animal {
     public:
     NullAnimal(const std::string _name): Animal(_name) {}
+    virtual const std::string verse_intro() {
+        return "";
+    }
     virtual const std::string verse_comment() {
         return "";
     }
@@ -118,6 +121,15 @@ class NullAnimal: public Animal {
     }
 };
 
+Animal *
+get_animal(Sequence &animals, size_t n) {
+    static auto na = NullAnimal("");
+    if (n >= animals.size()) {
+        return &na;
+    }
+    return animals.at(n);
+}
+
 const std::string get_verse(size_t n)
 {
     auto fly = StartingAnimal("fly");
@@ -129,10 +141,7 @@ const std::string get_verse(size_t n)
     auto horse = LethalAnimal("horse");
     Sequence animals = {&fly, &spider, &bird, &cat, &dog, &cow, &horse};
 
-    if (n >= animals.size()) {
-        return "";
-    }
-    auto animal = animals.at(n);
+    auto animal = get_animal(animals, n);
     auto verse = animal->verse_intro() + animal->verse_comment() +
         animal->swallow_sequence(animals, n) + animal->verse_conclusion();
 
