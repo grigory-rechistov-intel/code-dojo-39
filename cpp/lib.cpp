@@ -72,41 +72,32 @@ const std::string get_verse(size_t n)
     const std::vector<std::string> verses = {
             verse_intro("fly", animal_names) +
             verse_comment("fly") +
+            rescue_attempts(animal_names, 0) +
             verse_conclusion("fly", animal_names),
 
             verse_intro("spider", animal_names) +
             verse_comment("spider") +
-            "She swallowed the spider to catch the fly;\n" +
+            rescue_attempts(animal_names, 1) +
             verse_conclusion("fly", animal_names),
 
             verse_intro("bird", animal_names) +
             verse_comment("bird") +
-            "She swallowed the bird to catch the spider,\n" \
-            "She swallowed the spider to catch the fly;\n" +
+            rescue_attempts(animal_names, 2) +
             verse_conclusion("fly", animal_names),
 
             verse_intro("cat", animal_names) +
             verse_comment("cat") +
-            "She swallowed the cat to catch the bird,\n" \
-            "She swallowed the bird to catch the spider,\n" \
-            "She swallowed the spider to catch the fly;\n" +
+            rescue_attempts(animal_names, 3) +
             verse_conclusion("fly", animal_names),
 
             verse_intro("dog", animal_names) +
             verse_comment("dog") +
-            "She swallowed the dog to catch the cat,\n" \
-            "She swallowed the cat to catch the bird,\n" \
-            "She swallowed the bird to catch the spider,\n" \
-            "She swallowed the spider to catch the fly;\n" +
+            rescue_attempts(animal_names, 4) +
             verse_conclusion("fly", animal_names),
 
             verse_intro("cow", animal_names) +
             verse_comment("cow") +
-            "She swallowed the cow to catch the dog,\n" \
-            "She swallowed the dog to catch the cat,\n" \
-            "She swallowed the cat to catch the bird,\n" \
-            "She swallowed the bird to catch the spider,\n" \
-            "She swallowed the spider to catch the fly;\n" +
+            rescue_attempts(animal_names, 5) +
             verse_conclusion("fly", animal_names),
 
             verse_intro("horse", animal_names) +
