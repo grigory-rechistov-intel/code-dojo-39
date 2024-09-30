@@ -99,6 +99,25 @@ class LethalAnimal: public Animal {
     }
 };
 
+
+class NullAnimal: public Animal {
+    public:
+    NullAnimal(const std::string _name): Animal(_name) {}
+    virtual const std::string verse_comment() {
+        return "";
+    }
+    virtual const std::string verse_conclusion() {
+        return "";
+    }
+    virtual const std::string reason_to_swallow(const Animal *prey) {
+        return "";
+    }
+    virtual const std::string separator() {return "";};
+    virtual const std::string swallow_sequence(const Sequence animals, size_t depth) {
+        return "";
+    }
+};
+
 const std::string get_verse(size_t n)
 {
     auto fly = StartingAnimal("fly");
