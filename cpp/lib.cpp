@@ -48,11 +48,13 @@ const std::string verse_comment(const std::string &animal)
 const std::string rescue_attempts(const std::vector<std::string> &animal_names,
                               size_t depth)
 {
-    if (depth == 0) {
+    bool is_first_swallowed = depth == 0;
+    if (is_first_swallowed) {
         return "";
     }
 
-    if (depth >= animal_names.size() - 1) {
+    bool is_choked_on = depth >= animal_names.size() - 1;
+    if (is_choked_on) {
         return "";
     }
 
