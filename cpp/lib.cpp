@@ -23,6 +23,7 @@ class Animal {
     virtual const std::string verse_comment() = 0;
     virtual const std::string verse_conclusion() = 0;
     virtual const std::string reason_to_swallow(const Animal *prey) = 0;
+    virtual const std::string separator() {return ",\n";}
 };
 
 class StartingAnimal: public Animal {
@@ -42,6 +43,7 @@ class StartingAnimal: public Animal {
             "I don't know why she swallowed a {} - perhaps she'll die!\n",
                 name);
     }
+    virtual const std::string separator() {return ";\n";};
 };
 
 class RescueAnimal: public Animal {
@@ -93,7 +95,8 @@ const std::string rescue_attempts(const std::vector<Animal *> animals, size_t de
 
     auto line = animals[depth]->reason_to_swallow(prey);
 
-    std::string separator = depth == 1 ? ";\n" : ",\n";
+    std::string separator = prey->separator();
+
     return line + separator + rescue_attempts(animals, depth-1);
 }
 
