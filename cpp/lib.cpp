@@ -28,12 +28,6 @@ class Animal {
 
         auto line = reason_to_swallow(prey);
 
-        bool is_first_swallowed = depth == 0;
-        bool is_choked_on = depth >= animals.size() - 1;
-        if (is_first_swallowed || is_choked_on) {
-            return line;
-        }
-
         std::string separator = prey->separator();
         return line + separator + prey->swallow_sequence(animals, depth-1);
     }
