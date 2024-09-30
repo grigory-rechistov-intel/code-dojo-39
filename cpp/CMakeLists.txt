@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.5.0)
 project(sing-a-song VERSION 0.1.0 LANGUAGES C CXX)
 
 include(CTest)
+set(gtest_force_shared_crt on)
 enable_testing()
 
 add_executable(song Song.cpp lib.cpp)
