@@ -80,6 +80,8 @@ class LethalAnimal: public Animal {
 const std::string rescue_attempts(const std::vector<Animal *> animals, size_t depth)
 {
     auto this_animal = animals[depth];
+    auto prey = depth > 0? animals.at(depth - 1): nullptr;
+
     bool is_first_swallowed = depth == 0;
     if (is_first_swallowed) {
         return this_animal->reason_to_swallow(nullptr);
@@ -89,8 +91,6 @@ const std::string rescue_attempts(const std::vector<Animal *> animals, size_t de
     if (is_choked_on) {
         return this_animal->reason_to_swallow(nullptr);
     }
-
-    const auto prey = animals[depth - 1];
 
     auto line = this_animal->reason_to_swallow(prey);
 
