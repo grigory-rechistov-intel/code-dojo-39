@@ -6,7 +6,7 @@
 
 const std::string lady_intro = "There was an old lady who swallowed";
 
-const std::string verse_intro(std::string animal,
+const std::string verse_intro(const std::string &animal,
                               const std::vector<std::string> &animal_names) {
     std::string res = std::format("{} a {}", lady_intro, animal);
     std::string punctuation = ";";
@@ -19,7 +19,7 @@ const std::string verse_intro(std::string animal,
     return res + punctuation + '\n';
 }
 
-const std::string verse_conclusion(std::string animal,
+const std::string verse_conclusion(const std::string &animal,
                               const std::vector<std::string> &animal_names) {
     const std::string death_line = "...She's dead, of course!";
 
@@ -30,7 +30,7 @@ const std::string verse_conclusion(std::string animal,
         "I don't know why she swallowed a {} - perhaps she'll die!\n", animal);
 }
 
-const std::string verse_comment(const std::string animal)
+const std::string verse_comment(const std::string &animal)
 {
     std::map<std::string, std::string> comments_for_animal = {
         {"fly", ""},
@@ -43,6 +43,23 @@ const std::string verse_comment(const std::string animal)
     };
     return comments_for_animal.at(animal);
 
+}
+
+const std::string rescue_attempts(const std::vector<std::string> &animal_names,
+                              size_t depth)
+{
+    if (depth == 0) {
+        return "";
+    }
+    const auto &inner = animal_names[depth - 1];
+    const auto &outer = animal_names[depth];
+
+    std::string separator = depth == 1 ? ";\n" : ",\n";
+
+    std::string line = std::format("She swallowed the {} to catch the {}",
+        outer, inner);
+
+    return line + separator + rescue_attempts(animal_names, depth-1);
 }
 
 const std::string get_verse(size_t n)
