@@ -77,34 +77,7 @@ class LethalAnimal: public Animal {
     }
 };
 
-const std::string rescue_attempts(const std::vector<std::string> &animal_names,
-                              size_t depth)
-{
-    bool is_first_swallowed = depth == 0;
-    if (is_first_swallowed) {
-        auto first_animal = animal_names[0];
-        return std::format(
-        "I don't know why she swallowed a {} - perhaps she'll die!\n",
-            first_animal);
-    }
-
-    bool is_choked_on = depth >= animal_names.size() - 1;
-    if (is_choked_on) {
-        return "";
-    }
-
-    const auto &inner = animal_names[depth - 1];
-    const auto &outer = animal_names[depth];
-
-    std::string separator = depth == 1 ? ";\n" : ",\n";
-
-    std::string line = std::format("She swallowed the {} to catch the {}",
-        outer, inner);
-
-    return line + separator + rescue_attempts(animal_names, depth-1);
-}
-
-const std::string rescue_attempts2(const std::vector<Animal *> animals, size_t depth)
+const std::string rescue_attempts(const std::vector<Animal *> animals, size_t depth)
 {
     bool is_first_swallowed = depth == 0;
     if (is_first_swallowed) {
@@ -121,7 +94,7 @@ const std::string rescue_attempts2(const std::vector<Animal *> animals, size_t d
     auto line = animals[depth]->reason_to_swallow(prey);
 
     std::string separator = depth == 1 ? ";\n" : ",\n";
-    return line + separator + rescue_attempts2(animals, depth-1);
+    return line + separator + rescue_attempts(animals, depth-1);
 }
 
 
@@ -144,37 +117,37 @@ const std::string get_verse(size_t n)
     const std::vector<std::string> verses = {
             animals[0]->verse_intro() +
             animals[0]->verse_comment() +
-            rescue_attempts(animal_names, 0) +
+            rescue_attempts(animals, 0) +
             animals[0]->verse_conclusion(),
 
             animals[1]->verse_intro() +
             animals[1]->verse_comment() +
-            rescue_attempts(animal_names, 1) +
+            rescue_attempts(animals, 1) +
             animals[1]->verse_conclusion(),
 
             animals[2]->verse_intro() +
             animals[2]->verse_comment() +
-            rescue_attempts(animal_names, 2) +
+            rescue_attempts(animals, 2) +
             animals[2]->verse_conclusion(),
 
             animals[3]->verse_intro() +
             animals[3]->verse_comment() +
-            rescue_attempts(animal_names, 3) +
+            rescue_attempts(animals, 3) +
             animals[3]->verse_conclusion(),
 
             animals[4]->verse_intro() +
             animals[4]->verse_comment() +
-            rescue_attempts(animal_names, 4) +
+            rescue_attempts(animals, 4) +
             animals[4]->verse_conclusion(),
 
             animals[5]->verse_intro() +
             animals[5]->verse_comment() +
-            rescue_attempts(animal_names, 5) +
+            rescue_attempts(animals, 5) +
             animals[5]->verse_conclusion(),
 
             animals[6]->verse_intro() +
             animals[6]->verse_comment() +
-            rescue_attempts(animal_names, 6) +
+            rescue_attempts(animals, 6) +
             animals[6]->verse_conclusion(),
     };
 
