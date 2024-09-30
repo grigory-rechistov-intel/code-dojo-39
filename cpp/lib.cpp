@@ -1,11 +1,17 @@
 #include "lib.h"
 #include <vector>
 #include <format>
+#include <cassert>
 
 const std::string lady_intro = "There was an old lady who swallowed";
 
 const std::string get_verse(size_t n)
 {
+
+    const std::vector<std::string> animal_names = {
+        "fly", "spider", "bird", "cat", "dog", "cow", "horse"
+    };
+
     const std::vector<std::string> verses = {
             std::format("{} a fly.\n", lady_intro) +
             "I don't know why she swallowed a fly - perhaps she'll die!\n",
@@ -48,6 +54,8 @@ const std::string get_verse(size_t n)
             std::format("{} a horse...\n", lady_intro) +
             "...She's dead, of course!"
     };
+
+    assert(animal_names.size() == verses.size());
 
     if (n >= verses.size()) {
         return "";
