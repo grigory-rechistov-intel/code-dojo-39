@@ -18,6 +18,18 @@ const std::string verse_intro(std::string animal,
     return res + punctuation + '\n';
 }
 
+const std::string verse_conclusion(std::string animal,
+                              const std::vector<std::string> &animal_names) {
+    const std::string death_line = "...She's dead, of course!";
+
+    if (animal == animal_names.back()) {
+        return death_line;
+    }
+    return std::format(
+        "I don't know why she swallowed a {} - perhaps she'll die!\n", animal);
+}
+
+
 const std::string get_verse(size_t n)
 {
 
@@ -27,33 +39,33 @@ const std::string get_verse(size_t n)
 
     const std::vector<std::string> verses = {
             verse_intro("fly", animal_names) +
-            "I don't know why she swallowed a fly - perhaps she'll die!\n",
+            verse_conclusion("fly", animal_names),
 
             verse_intro("spider", animal_names) +
             "That wriggled and wiggled and tickled inside her.\n" \
-            "She swallowed the spider to catch the fly;\n" \
-            "I don't know why she swallowed a fly - perhaps she'll die!\n",
+            "She swallowed the spider to catch the fly;\n" +
+            verse_conclusion("fly", animal_names),
 
             verse_intro("bird", animal_names) +
             "How absurd to swallow a bird.\n" \
             "She swallowed the bird to catch the spider,\n" \
-            "She swallowed the spider to catch the fly;\n" \
-            "I don't know why she swallowed a fly - perhaps she'll die!\n",
+            "She swallowed the spider to catch the fly;\n" +
+            verse_conclusion("fly", animal_names),
 
             verse_intro("cat", animal_names) +
             "Fancy that to swallow a cat!\n" \
             "She swallowed the cat to catch the bird,\n" \
             "She swallowed the bird to catch the spider,\n" \
-            "She swallowed the spider to catch the fly;\n" \
-            "I don't know why she swallowed a fly - perhaps she'll die!\n",
+            "She swallowed the spider to catch the fly;\n" +
+            verse_conclusion("fly", animal_names),
 
             verse_intro("dog", animal_names) +
             "What a hog, to swallow a dog!\n" \
             "She swallowed the dog to catch the cat,\n" \
             "She swallowed the cat to catch the bird,\n" \
             "She swallowed the bird to catch the spider,\n" \
-            "She swallowed the spider to catch the fly;\n" \
-            "I don't know why she swallowed a fly - perhaps she'll die!\n",
+            "She swallowed the spider to catch the fly;\n" +
+            verse_conclusion("fly", animal_names),
 
             verse_intro("cow", animal_names) +
             "I don't know how she swallowed a cow!\n" \
@@ -61,11 +73,11 @@ const std::string get_verse(size_t n)
             "She swallowed the dog to catch the cat,\n" \
             "She swallowed the cat to catch the bird,\n" \
             "She swallowed the bird to catch the spider,\n" \
-            "She swallowed the spider to catch the fly;\n" \
-            "I don't know why she swallowed a fly - perhaps she'll die!\n",
+            "She swallowed the spider to catch the fly;\n" +
+            verse_conclusion("fly", animal_names),
 
             verse_intro("horse", animal_names) +
-            "...She's dead, of course!"
+            verse_conclusion("horse", animal_names)
     };
 
     assert(animal_names.size() == verses.size());
