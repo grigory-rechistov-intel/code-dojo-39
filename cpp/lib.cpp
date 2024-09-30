@@ -83,12 +83,8 @@ const std::string rescue_attempts(const std::vector<Animal *> animals, size_t de
     auto prey = depth > 0? animals.at(depth - 1): nullptr;
 
     bool is_first_swallowed = depth == 0;
-    if (is_first_swallowed) {
-        return this_animal->reason_to_swallow(nullptr);
-    }
-
     bool is_choked_on = depth >= animals.size() - 1;
-    if (is_choked_on) {
+    if (is_first_swallowed || is_choked_on) {
         return this_animal->reason_to_swallow(nullptr);
     }
 
