@@ -26,8 +26,7 @@ const std::string verse_conclusion(const std::string &animal,
     if (animal == animal_names.back()) {
         return death_line;
     }
-    return std::format(
-        "I don't know why she swallowed a {} - perhaps she'll die!\n", animal);
+    return "";
 }
 
 const std::string verse_comment(const std::string &animal)
@@ -50,7 +49,10 @@ const std::string rescue_attempts(const std::vector<std::string> &animal_names,
 {
     bool is_first_swallowed = depth == 0;
     if (is_first_swallowed) {
-        return "";
+        auto first_animal = animal_names[0];
+        return std::format(
+        "I don't know why she swallowed a {} - perhaps she'll die!\n",
+            first_animal);
     }
 
     bool is_choked_on = depth >= animal_names.size() - 1;
