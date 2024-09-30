@@ -82,13 +82,13 @@ const std::string rescue_attempts(const std::vector<Animal *> animals, size_t de
     auto this_animal = animals[depth];
     auto prey = depth > 0? animals.at(depth - 1): nullptr;
 
+    auto line = this_animal->reason_to_swallow(prey);
+
     bool is_first_swallowed = depth == 0;
     bool is_choked_on = depth >= animals.size() - 1;
     if (is_first_swallowed || is_choked_on) {
-        return this_animal->reason_to_swallow(nullptr);
+        return line;
     }
-
-    auto line = this_animal->reason_to_swallow(prey);
 
     std::string separator = prey->separator();
 
