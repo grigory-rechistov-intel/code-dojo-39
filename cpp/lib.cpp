@@ -1,8 +1,6 @@
 #include "lib.h"
 #include <vector>
 #include <format>
-#include <cassert>
-#include <map>
 
 class Animal {
     protected:
