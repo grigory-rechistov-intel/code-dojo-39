@@ -71,8 +71,8 @@ const std::string get_verse(size_t n)
 
     const std::vector<std::string> verses = {
             verse_intro("fly", animal_names) +
-            verse_conclusion("fly", animal_names) +
-            verse_comment("fly"),
+            verse_comment("fly") +
+            verse_conclusion("fly", animal_names),
 
             verse_intro("spider", animal_names) +
             verse_comment("spider") +
