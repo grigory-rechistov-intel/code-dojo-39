@@ -24,7 +24,7 @@ class Animal {
     virtual const std::string separator() {return ",\n";}
 
     virtual const std::string swallow_sequence(const std::vector<Animal *> animals, size_t depth) {
-        auto this_animal = animals[depth];
+        auto this_animal = this;
         auto prey = depth > 0? animals.at(depth - 1): nullptr;
 
         auto line = this_animal->reason_to_swallow(prey);
@@ -37,7 +37,7 @@ class Animal {
 
         std::string separator = prey->separator();
 
-        return line + separator + swallow_sequence(animals, depth-1);
+        return line + separator + prey->swallow_sequence(animals, depth-1);
     }
 };
 
