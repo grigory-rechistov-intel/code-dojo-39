@@ -18,6 +18,7 @@ class Animal {
         std::string res = std::format("{} a {}", lady_intro, name);
         return res + intro_punctuation + '\n';
     }
+    virtual const std::string verse_comment() = 0;
 };
 
 class StartingAnimal: public Animal {
@@ -25,11 +26,18 @@ class StartingAnimal: public Animal {
     StartingAnimal(const std::string _name): Animal(_name) {
         intro_punctuation = ".";
     }
+    virtual const std::string verse_comment() {
+        return "";
+    }
 };
 
 class RescueAnimal: public Animal {
+    std::string comment;
     public:
-    RescueAnimal(const std::string _name): Animal(_name) {
+    RescueAnimal(const std::string _name, const std::string _comment):
+        Animal(_name), comment(_comment) {}
+    virtual const std::string verse_comment() {
+        return comment;
     }
 };
 
@@ -37,6 +45,9 @@ class LethalAnimal: public Animal {
     public:
     LethalAnimal(const std::string _name): Animal(_name) {
         intro_punctuation = "...";
+    }
+    virtual const std::string verse_comment() {
+        return "";
     }
 };
 
@@ -48,21 +59,6 @@ const std::string verse_conclusion(const std::string &animal,
         return death_line;
     }
     return "";
-}
-
-const std::string verse_comment(const std::string &animal)
-{
-    std::map<std::string, std::string> comments_for_animal = {
-        {"fly", ""},
-        {"spider", "That wriggled and wiggled and tickled inside her.\n"},
-        {"bird", "How absurd to swallow a bird.\n"},
-        {"cat", "Fancy that to swallow a cat!\n"},
-        {"dog", "What a hog, to swallow a dog!\n"},
-        {"cow", "I don't know how she swallowed a cow!\n"},
-        {"horse", ""}
-    };
-    return comments_for_animal.at(animal);
-
 }
 
 const std::string rescue_attempts(const std::vector<std::string> &animal_names,
@@ -100,47 +96,47 @@ const std::string get_verse(size_t n)
     };
 
     auto fly = StartingAnimal("fly");
-    auto spider = RescueAnimal("spider");
-    auto bird = RescueAnimal("bird");
-    auto cat = RescueAnimal("cat");
-    auto dog = RescueAnimal("dog");
-    auto cow = RescueAnimal("cow");
+    auto spider = RescueAnimal("spider", "That wriggled and wiggled and tickled inside her.\n");
+    auto bird = RescueAnimal("bird", "How absurd to swallow a bird.\n");
+    auto cat = RescueAnimal("cat", "Fancy that to swallow a cat!\n");
+    auto dog = RescueAnimal("dog", "What a hog, to swallow a dog!\n");
+    auto cow = RescueAnimal("cow", "I don't know how she swallowed a cow!\n");
     auto horse = LethalAnimal("horse");
     std::vector<Animal *> animals = {&fly, &spider, &bird, &cat, &dog, &cow, &horse};
 
     const std::vector<std::string> verses = {
             animals[0]->verse_intro() +
-            verse_comment("fly") +
+            animals[0]->verse_comment() +
             rescue_attempts(animal_names, 0) +
             verse_conclusion("fly", animal_names),
 
             animals[1]->verse_intro() +
-            verse_comment("spider") +
+            animals[1]->verse_comment() +
             rescue_attempts(animal_names, 1) +
             verse_conclusion("fly", animal_names),
 
             animals[2]->verse_intro() +
-            verse_comment("bird") +
+            animals[2]->verse_comment() +
             rescue_attempts(animal_names, 2) +
             verse_conclusion("fly", animal_names),
 
             animals[3]->verse_intro() +
-            verse_comment("cat") +
+            animals[3]->verse_comment() +
             rescue_attempts(animal_names, 3) +
             verse_conclusion("fly", animal_names),
 
             animals[4]->verse_intro() +
-            verse_comment("dog") +
+            animals[4]->verse_comment() +
             rescue_attempts(animal_names, 4) +
             verse_conclusion("fly", animal_names),
 
             animals[5]->verse_intro() +
-            verse_comment("cow") +
+            animals[5]->verse_comment() +
             rescue_attempts(animal_names, 5) +
             verse_conclusion("fly", animal_names),
 
             animals[6]->verse_intro() +
-            verse_comment("horse") +
+            animals[6]->verse_comment() +
             rescue_attempts(animal_names, 6) +
             verse_conclusion("horse", animal_names)
     };
