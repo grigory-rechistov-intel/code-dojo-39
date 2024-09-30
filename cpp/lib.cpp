@@ -25,7 +25,6 @@ class Animal {
     virtual const std::string verse_conclusion() = 0;
     virtual const std::string reason_to_swallow(const Animal *prey) = 0;
     virtual const std::string separator() {return ",\n";}
-
     virtual const std::string swallow_sequence(const Sequence animals, size_t depth) = 0;
 };
 
@@ -41,7 +40,6 @@ class StartingAnimal: public Animal {
     virtual const std::string verse_conclusion() {
         return "";
     }
-
     virtual const std::string reason_to_swallow(const Animal *prey) {
         return std::format(
             "I don't know why she swallowed a {} - perhaps she'll die!\n",
@@ -70,9 +68,7 @@ class RescueAnimal: public Animal {
     }
     virtual const std::string swallow_sequence(const Sequence animals, size_t depth) {
         auto prey = depth > 0? animals.at(depth - 1): nullptr;
-
         auto line = reason_to_swallow(prey);
-
         std::string separator = prey->separator();
         return line + separator + prey->swallow_sequence(animals, depth-1);
     }
@@ -93,7 +89,6 @@ class LethalAnimal: public Animal {
     virtual const std::string reason_to_swallow(const Animal *prey) {
         return "";
     }
-
     virtual const std::string swallow_sequence(const Sequence animals, size_t depth) {
         return reason_to_swallow(nullptr);
     }
@@ -151,7 +146,6 @@ const std::string get_verse(size_t n)
 const std::string get_continuation(size_t starting_verse)
 {
     auto verse = get_verse(starting_verse);
-
     if (verse.size() == 0) {
         return verse;
     }
