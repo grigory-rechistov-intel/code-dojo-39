@@ -5,8 +5,10 @@
 #include <map>
 
 class Animal {
+    protected:
     std::string name;
     public:
+    const std::string get_name() const {return name;}
     Animal() = delete;
     std::string intro_punctuation;
     Animal(const std::string _name) {
@@ -20,6 +22,7 @@ class Animal {
     }
     virtual const std::string verse_comment() = 0;
     virtual const std::string verse_conclusion() = 0;
+    virtual const std::string reason_to_swallow(const Animal *prey) = 0;
 };
 
 class StartingAnimal: public Animal {
@@ -32,6 +35,12 @@ class StartingAnimal: public Animal {
     }
     virtual const std::string verse_conclusion() {
         return "";
+    }
+
+    virtual const std::string reason_to_swallow(const Animal *prey) {
+        return std::format(
+            "I don't know why she swallowed a {} - perhaps she'll die!\n",
+                name);
     }
 };
 
@@ -46,6 +55,10 @@ class RescueAnimal: public Animal {
     virtual const std::string verse_conclusion() {
         return "";
     }
+    virtual const std::string reason_to_swallow(const Animal *prey) {
+        return std::format("She swallowed the {} to catch the {}", name, prey->get_name());
+    }
+
 };
 
 class LethalAnimal: public Animal {
@@ -58,6 +71,9 @@ class LethalAnimal: public Animal {
     }
     virtual const std::string verse_conclusion() {
         return "...She's dead, of course!";
+    }
+    virtual const std::string reason_to_swallow(const Animal *prey) {
+        return "";
     }
 };
 
@@ -87,6 +103,27 @@ const std::string rescue_attempts(const std::vector<std::string> &animal_names,
 
     return line + separator + rescue_attempts(animal_names, depth-1);
 }
+
+const std::string rescue_attempts2(const std::vector<Animal *> animals, size_t depth)
+{
+    bool is_first_swallowed = depth == 0;
+    if (is_first_swallowed) {
+        return animals[depth]->reason_to_swallow(nullptr);
+    }
+
+    bool is_choked_on = depth >= animals.size() - 1;
+    if (is_choked_on) {
+        return animals[depth]->reason_to_swallow(nullptr);
+    }
+
+    const auto prey = animals[depth - 1];
+
+    auto line = animals[depth]->reason_to_swallow(prey);
+
+    std::string separator = depth == 1 ? ";\n" : ",\n";
+    return line + separator + rescue_attempts2(animals, depth-1);
+}
+
 
 const std::string get_verse(size_t n)
 {
