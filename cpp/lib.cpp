@@ -101,10 +101,6 @@ const std::string rescue_attempts(const std::vector<Animal *> animals, size_t de
 const std::string get_verse(size_t n)
 {
 
-    const std::vector<std::string> animal_names = {
-        "fly", "spider", "bird", "cat", "dog", "cow", "horse"
-    };
-
     auto fly = StartingAnimal("fly");
     auto spider = RescueAnimal("spider", "That wriggled and wiggled and tickled inside her.\n");
     auto bird = RescueAnimal("bird", "How absurd to swallow a bird.\n");
@@ -150,8 +146,6 @@ const std::string get_verse(size_t n)
             rescue_attempts(animals, 6) +
             animals[6]->verse_conclusion(),
     };
-
-    assert(animal_names.size() == verses.size());
 
     if (n >= verses.size()) {
         return "";
