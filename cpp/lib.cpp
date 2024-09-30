@@ -22,6 +22,23 @@ class Animal {
     virtual const std::string verse_conclusion() = 0;
     virtual const std::string reason_to_swallow(const Animal *prey) = 0;
     virtual const std::string separator() {return ",\n";}
+
+    virtual const std::string swallow_sequence(const std::vector<Animal *> animals, size_t depth) {
+        auto this_animal = animals[depth];
+        auto prey = depth > 0? animals.at(depth - 1): nullptr;
+
+        auto line = this_animal->reason_to_swallow(prey);
+
+        bool is_first_swallowed = depth == 0;
+        bool is_choked_on = depth >= animals.size() - 1;
+        if (is_first_swallowed || is_choked_on) {
+            return line;
+        }
+
+        std::string separator = prey->separator();
+
+        return line + separator + swallow_sequence(animals, depth-1);
+    }
 };
 
 class StartingAnimal: public Animal {
@@ -77,25 +94,6 @@ class LethalAnimal: public Animal {
     }
 };
 
-const std::string rescue_attempts(const std::vector<Animal *> animals, size_t depth)
-{
-    auto this_animal = animals[depth];
-    auto prey = depth > 0? animals.at(depth - 1): nullptr;
-
-    auto line = this_animal->reason_to_swallow(prey);
-
-    bool is_first_swallowed = depth == 0;
-    bool is_choked_on = depth >= animals.size() - 1;
-    if (is_first_swallowed || is_choked_on) {
-        return line;
-    }
-
-    std::string separator = prey->separator();
-
-    return line + separator + rescue_attempts(animals, depth-1);
-}
-
-
 const std::string get_verse(size_t n)
 {
 
@@ -111,37 +109,37 @@ const std::string get_verse(size_t n)
     const std::vector<std::string> verses = {
             animals[0]->verse_intro() +
             animals[0]->verse_comment() +
-            rescue_attempts(animals, 0) +
+            animals[0]->swallow_sequence(animals, 0) +
             animals[0]->verse_conclusion(),
 
             animals[1]->verse_intro() +
             animals[1]->verse_comment() +
-            rescue_attempts(animals, 1) +
+            animals[1]->swallow_sequence(animals, 1) +
             animals[1]->verse_conclusion(),
 
             animals[2]->verse_intro() +
             animals[2]->verse_comment() +
-            rescue_attempts(animals, 2) +
+            animals[2]->swallow_sequence(animals, 2) +
             animals[2]->verse_conclusion(),
 
             animals[3]->verse_intro() +
             animals[3]->verse_comment() +
-            rescue_attempts(animals, 3) +
+            animals[3]->swallow_sequence(animals, 3) +
             animals[3]->verse_conclusion(),
 
             animals[4]->verse_intro() +
             animals[4]->verse_comment() +
-            rescue_attempts(animals, 4) +
+            animals[4]->swallow_sequence(animals, 4) +
             animals[4]->verse_conclusion(),
 
             animals[5]->verse_intro() +
             animals[5]->verse_comment() +
-            rescue_attempts(animals, 5) +
+            animals[5]->swallow_sequence(animals, 5) +
             animals[5]->verse_conclusion(),
 
             animals[6]->verse_intro() +
             animals[6]->verse_comment() +
-            rescue_attempts(animals, 6) +
+            animals[6]->swallow_sequence(animals, 6) +
             animals[6]->verse_conclusion(),
     };
 
