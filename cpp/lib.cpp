@@ -4,20 +4,41 @@
 #include <cassert>
 #include <map>
 
-
-const std::string verse_intro(const std::string &animal,
-                              const std::vector<std::string> &animal_names) {
-    const std::string lady_intro = "There was an old lady who swallowed";
-    std::string res = std::format("{} a {}", lady_intro, animal);
-    std::string punctuation = ";";
-    if (animal == animal_names.front()) {
-        punctuation = ".";
-    } else if (animal == animal_names.back()) {
-        punctuation = "...";
+class Animal {
+    std::string name;
+    public:
+    Animal() = delete;
+    std::string intro_punctuation;
+    Animal(const std::string _name) {
+        name = _name;
+        intro_punctuation = ";";
     }
+    const std::string verse_intro() {
+        const std::string lady_intro = "There was an old lady who swallowed";
+        std::string res = std::format("{} a {}", lady_intro, name);
+        return res + intro_punctuation + '\n';
+    }
+};
 
-    return res + punctuation + '\n';
-}
+class StartingAnimal: public Animal {
+    public:
+    StartingAnimal(const std::string _name): Animal(_name) {
+        intro_punctuation = ".";
+    }
+};
+
+class RescueAnimal: public Animal {
+    public:
+    RescueAnimal(const std::string _name): Animal(_name) {
+    }
+};
+
+class LethalAnimal: public Animal {
+    public:
+    LethalAnimal(const std::string _name): Animal(_name) {
+        intro_punctuation = "...";
+    }
+};
 
 const std::string verse_conclusion(const std::string &animal,
                               const std::vector<std::string> &animal_names) {
@@ -78,38 +99,47 @@ const std::string get_verse(size_t n)
         "fly", "spider", "bird", "cat", "dog", "cow", "horse"
     };
 
+    auto fly = StartingAnimal("fly");
+    auto spider = RescueAnimal("spider");
+    auto bird = RescueAnimal("bird");
+    auto cat = RescueAnimal("cat");
+    auto dog = RescueAnimal("dog");
+    auto cow = RescueAnimal("cow");
+    auto horse = LethalAnimal("horse");
+    std::vector<Animal *> animals = {&fly, &spider, &bird, &cat, &dog, &cow, &horse};
+
     const std::vector<std::string> verses = {
-            verse_intro("fly", animal_names) +
+            animals[0]->verse_intro() +
             verse_comment("fly") +
             rescue_attempts(animal_names, 0) +
             verse_conclusion("fly", animal_names),
 
-            verse_intro("spider", animal_names) +
+            animals[1]->verse_intro() +
             verse_comment("spider") +
             rescue_attempts(animal_names, 1) +
             verse_conclusion("fly", animal_names),
 
-            verse_intro("bird", animal_names) +
+            animals[2]->verse_intro() +
             verse_comment("bird") +
             rescue_attempts(animal_names, 2) +
             verse_conclusion("fly", animal_names),
 
-            verse_intro("cat", animal_names) +
+            animals[3]->verse_intro() +
             verse_comment("cat") +
             rescue_attempts(animal_names, 3) +
             verse_conclusion("fly", animal_names),
 
-            verse_intro("dog", animal_names) +
+            animals[4]->verse_intro() +
             verse_comment("dog") +
             rescue_attempts(animal_names, 4) +
             verse_conclusion("fly", animal_names),
 
-            verse_intro("cow", animal_names) +
+            animals[5]->verse_intro() +
             verse_comment("cow") +
             rescue_attempts(animal_names, 5) +
             verse_conclusion("fly", animal_names),
 
-            verse_intro("horse", animal_names) +
+            animals[6]->verse_intro() +
             verse_comment("horse") +
             rescue_attempts(animal_names, 6) +
             verse_conclusion("horse", animal_names)
