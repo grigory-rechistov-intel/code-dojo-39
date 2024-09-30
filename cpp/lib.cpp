@@ -101,7 +101,6 @@ class LethalAnimal: public Animal {
 
 const std::string get_verse(size_t n)
 {
-
     auto fly = StartingAnimal("fly");
     auto spider = RescueAnimal("spider", "That wriggled and wiggled and tickled inside her.\n");
     auto bird = RescueAnimal("bird", "How absurd to swallow a bird.\n");
@@ -111,48 +110,14 @@ const std::string get_verse(size_t n)
     auto horse = LethalAnimal("horse");
     Sequence animals = {&fly, &spider, &bird, &cat, &dog, &cow, &horse};
 
-    const std::vector<std::string> verses = {
-            animals[0]->verse_intro() +
-            animals[0]->verse_comment() +
-            animals[0]->swallow_sequence(animals, 0) +
-            animals[0]->verse_conclusion(),
-
-            animals[1]->verse_intro() +
-            animals[1]->verse_comment() +
-            animals[1]->swallow_sequence(animals, 1) +
-            animals[1]->verse_conclusion(),
-
-            animals[2]->verse_intro() +
-            animals[2]->verse_comment() +
-            animals[2]->swallow_sequence(animals, 2) +
-            animals[2]->verse_conclusion(),
-
-            animals[3]->verse_intro() +
-            animals[3]->verse_comment() +
-            animals[3]->swallow_sequence(animals, 3) +
-            animals[3]->verse_conclusion(),
-
-            animals[4]->verse_intro() +
-            animals[4]->verse_comment() +
-            animals[4]->swallow_sequence(animals, 4) +
-            animals[4]->verse_conclusion(),
-
-            animals[5]->verse_intro() +
-            animals[5]->verse_comment() +
-            animals[5]->swallow_sequence(animals, 5) +
-            animals[5]->verse_conclusion(),
-
-            animals[6]->verse_intro() +
-            animals[6]->verse_comment() +
-            animals[6]->swallow_sequence(animals, 6) +
-            animals[6]->verse_conclusion(),
-    };
-
-    if (n >= verses.size()) {
+    if (n >= animals.size()) {
         return "";
     }
-    return verses.at(n);
+    auto animal = animals.at(n);
+    auto verse = animal->verse_intro() + animal->verse_comment() +
+        animal->swallow_sequence(animals, n) + animal->verse_conclusion();
 
+    return verse;
 }
 
 const std::string get_continuation(size_t starting_verse)
