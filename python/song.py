@@ -47,7 +47,7 @@ def sequence(things, amount):
 
 
 killer = Thing("horse", "...She's dead, of course!")
-things_to_swollow = [
+things_to_swallow = [
     Thing("fly", "I don't know why she swallowed a fly - perhaps she'll die!"),
     Thing("spider", "That wriggled and wiggled and tickled inside her."),
     Thing("bird", "How absurd to swallow a bird."),
@@ -60,7 +60,7 @@ things_to_swollow = [
 def song():
     verses = []
     for i in range(0, 7):
-        verses.append("\n".join(verse(things_to_swollow, killer, i)))
+        verses.append("\n".join(verse(things_to_swallow, killer, i)))
     return "\n\n".join(verses)
 
 
