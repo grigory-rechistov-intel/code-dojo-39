@@ -50,7 +50,8 @@ class Test(unittest.TestCase):
 
 class TestSequence(unittest.TestCase):
     def test_sequence_of_none(self):
-        self.assertEqual("", sequence([], 0))
+        things = ("1", "2")
+        self.assertEqual("", sequence(things, 1))
 
     def test_sequence_of_one(self):
         things = ("1", "2")
