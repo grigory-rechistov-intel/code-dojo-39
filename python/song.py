@@ -40,7 +40,7 @@ def verse(i):
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
-            "I don't know why she swallowed a fly - perhaps she'll die!",
+            "I don't know why she swallowed a %s - perhaps she'll die!" % "fly",
         ]
 
     if i == 5:
