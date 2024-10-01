@@ -1,4 +1,4 @@
-def verse(things, i):
+def verse(things, killer, i):
     if i == 0:
         return [
             "There was an old lady who swallowed a %s." % things[i],
@@ -57,7 +57,7 @@ def verse(things, i):
 
     if i == 6:
         return [
-            "There was an old lady who swallowed a %s..." % things[i],
+            "There was an old lady who swallowed a %s..." % killer,
             "...She's dead, of course!",
         ]
 
@@ -68,10 +68,11 @@ def sequence(things, amount):
     return text
 
 def song():
-    things_to_swollow = ["fly", "spider", "bird", "cat", "dog", "cow", "horse"]
+    killer = "horse"
+    things_to_swollow = ["fly", "spider", "bird", "cat", "dog", "cow"]
     verses = []
     for i in range(0,7):
-        verses.append("\n".join(verse(things_to_swollow, i)))
+        verses.append("\n".join(verse(things_to_swollow, killer, i)))
     return "\n\n".join(verses)
 
 def lyrics():
