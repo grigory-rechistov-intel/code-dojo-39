@@ -46,33 +46,33 @@ There was an old lady who swallowed a horse...
 
 class Test(unittest.TestCase):
     def test_characterization(self):
-        self.maxDiff = 5000
-        self.assertEqual(lyrics().split("\n"), expected_song.split("\n"))
+        self.maxDiff = None
+        self.assertEqual(expected_song.split("\n"), lyrics().split("\n"))
 
 
 class TestSequence(unittest.TestCase):
-    def test_sequence_of_none(self):
-        things = ("1", "2")
-        self.assertEqual("", sequence(things, 0))
-
-    def test_sequence_of_one(self):
-        things = (Thing("1", "spice1"), Thing("2", "spice2"))
-        self.assertEqual(
-            "She swallowed the 2 to catch the 1", sequence(things, 1)
-        )
-
-    def test_sequence_of_two(self):
-        things = (
+    def setUp(self) -> None:
+        self.things = (
             Thing("1", "spice1"),
             Thing("2", "spice2"),
             Thing("3", "spice3"),
         )
+
+    def test_sequence_of_none(self):
+        self.assertEqual("", sequence(self.things, 0))
+
+    def test_sequence_of_one(self):
+        self.assertEqual(
+            "She swallowed the 2 to catch the 1", sequence(self.things, 1)
+        )
+
+    def test_sequence_of_two(self):
         self.assertEqual(
             [
                 "She swallowed the 3 to catch the 2,",
                 "She swallowed the 2 to catch the 1",
             ],
-            sequence(things, 2).split("\n"),
+            sequence(self.things, 2).split("\n"),
         )
 
 
