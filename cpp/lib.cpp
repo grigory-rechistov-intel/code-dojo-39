@@ -10,6 +10,7 @@ class Animal {
     std::string name;
     std::string intro_punctuation;
     public:
+    virtual ~Animal() {};
     const std::string get_name() const {return name;}
     Animal() = delete;
     Animal(const std::string _name) {
@@ -125,17 +126,25 @@ get_animal(Sequence &animals, size_t n) {
     return animals.at(n);
 }
 
-const std::string get_verse(size_t n)
-{
-    auto fly = StartingAnimal("fly");
-    auto spider = RescueAnimal("spider", "That wriggled and wiggled and tickled inside her.\n");
-    auto bird = RescueAnimal("bird", "How absurd to swallow a bird.\n");
-    auto cat = RescueAnimal("cat", "Fancy that to swallow a cat!\n");
-    auto dog = RescueAnimal("dog", "What a hog, to swallow a dog!\n");
-    auto cow = RescueAnimal("cow", "I don't know how she swallowed a cow!\n");
-    auto horse = LethalAnimal("horse");
-    Sequence animals = {&fly, &spider, &bird, &cat, &dog, &cow, &horse};
+Sequence make_classic_sequence() {
+    auto fly = new StartingAnimal("fly");
+    auto spider = new RescueAnimal("spider", "That wriggled and wiggled and tickled inside her.\n");
+    auto bird = new RescueAnimal("bird", "How absurd to swallow a bird.\n");
+    auto cat = new RescueAnimal("cat", "Fancy that to swallow a cat!\n");
+    auto dog = new RescueAnimal("dog", "What a hog, to swallow a dog!\n");
+    auto cow = new RescueAnimal("cow", "I don't know how she swallowed a cow!\n");
+    auto horse = new LethalAnimal("horse");
+    return {fly, spider, bird, cat, dog, cow, horse};
+}
 
+void delete_sequence(Sequence &s) {
+    for (Animal *a: s) {
+        delete a;
+    }
+}
+
+const std::string get_verse(Sequence &animals, size_t n)
+{
     auto animal = get_animal(animals, n);
     auto verse = animal->verse_intro() + animal->verse_comment() +
         animal->swallow_sequence(animals, n) + animal->verse_conclusion();
@@ -143,13 +152,13 @@ const std::string get_verse(size_t n)
     return verse;
 }
 
-const std::string get_continuation(size_t starting_verse)
+const std::string get_continuation(Sequence &sequence, size_t starting_verse)
 {
-    auto verse = get_verse(starting_verse);
+    auto verse = get_verse(sequence, starting_verse);
     if (verse.size() == 0) {
         return verse;
     }
-    return verse + "\n" + get_continuation(starting_verse + 1);
+    return verse + "\n" + get_continuation(sequence, starting_verse + 1);
 }
 
 const std::string chop_final_newline(std::string in)
@@ -162,5 +171,7 @@ const std::string chop_final_newline(std::string in)
 
 const std::string get_song()
 {
-    return chop_final_newline(get_continuation(0));
+    auto classic_sequence = make_classic_sequence();
+    return chop_final_newline(get_continuation(classic_sequence, 0));
+    delete_sequence(classic_sequence);
 }
