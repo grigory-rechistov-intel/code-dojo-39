@@ -156,16 +156,7 @@ class Song {
 
 };
 
-Animal *
-get_animal(Sequence &animals, size_t n) {
-    static auto na = NullAnimal("");
-    if (n >= animals.size()) {
-        return &na;
-    }
-    return animals.at(n);
-}
-
-Sequence make_classic_sequence() {
+Song make_classic_sequence() {
     auto fly = new StartingAnimal("fly");
     auto spider = new RescueAnimal("spider", "That wriggled and wiggled and tickled inside her.\n");
     auto bird = new RescueAnimal("bird", "How absurd to swallow a bird.\n");
@@ -173,31 +164,7 @@ Sequence make_classic_sequence() {
     auto dog = new RescueAnimal("dog", "What a hog, to swallow a dog!\n");
     auto cow = new RescueAnimal("cow", "I don't know how she swallowed a cow!\n");
     auto horse = new LethalAnimal("horse");
-    return {fly, spider, bird, cat, dog, cow, horse};
-}
-
-void delete_sequence(Sequence &s) {
-    for (Animal *a: s) {
-        delete a;
-    }
-}
-
-const std::string get_verse(Sequence &animals, size_t n)
-{
-    auto animal = get_animal(animals, n);
-    auto verse = animal->verse_intro() + animal->verse_comment() +
-        animal->swallow_sequence(animals, n) + animal->verse_conclusion();
-
-    return verse;
-}
-
-const std::string get_continuation(Sequence &sequence, size_t starting_verse)
-{
-    auto verse = get_verse(sequence, starting_verse);
-    if (verse.size() == 0) {
-        return verse;
-    }
-    return verse + "\n" + get_continuation(sequence, starting_verse + 1);
+    return Song({fly, spider, bird, cat, dog, cow, horse});
 }
 
 const std::string chop_final_newline(std::string in)
@@ -210,16 +177,15 @@ const std::string chop_final_newline(std::string in)
 
 const std::string get_song()
 {
-    auto classic_sequence = make_classic_sequence();
-    return chop_final_newline(get_continuation(classic_sequence, 0));
-    delete_sequence(classic_sequence);
+    auto classic_song = make_classic_sequence();
+    return chop_final_newline(classic_song.get_continuation(0));
 }
 
 const std::string get_silly_song()
 {
-    auto bug = StartingAnimal("bug");
-    auto slug = RescueAnimal("slug", "It hid in her mug.\n");
-    auto crocodile = LethalAnimal("crocodile");
-    Sequence silly = {&bug, &slug, &crocodile};
-    return(get_continuation(silly, 0));
+    auto bug = new StartingAnimal("bug");
+    auto slug = new RescueAnimal("slug", "It hid in her mug.\n");
+    auto crocodile = new LethalAnimal("crocodile");
+    Song silly({bug, slug, crocodile});
+    return(silly.get_continuation(0));
 }
