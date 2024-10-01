@@ -11,8 +11,7 @@ def verse(things: list[Thing], killer: Thing, i):
     if i == 0:
         return [
             "There was an old lady who swallowed a %s." % things[i].name,
-            "I don't know why she swallowed a %s - perhaps she'll die!"
-            % things[i].name,
+            things[i].spice,
         ]
 
     if i == 1:
@@ -20,8 +19,7 @@ def verse(things: list[Thing], killer: Thing, i):
             "There was an old lady who swallowed a %s;" % things[i].name,
             "That wriggled and wiggled and tickled inside her.",
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
-            "I don't know why she swallowed a %s - perhaps she'll die!"
-            % things[0].name,
+            things[0].spice,
         ]
 
     if i == 2:
@@ -30,8 +28,7 @@ def verse(things: list[Thing], killer: Thing, i):
             "How absurd to swallow a %s." % things[i].name,
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
-            "I don't know why she swallowed a %s - perhaps she'll die!"
-            % things[0].name,
+            things[0].spice,
         ]
 
     if i == 3:
@@ -41,8 +38,7 @@ def verse(things: list[Thing], killer: Thing, i):
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
-            "I don't know why she swallowed a %s - perhaps she'll die!"
-            % things[0].name,
+            things[0].spice,
         ]
 
     if i == 4:
@@ -53,8 +49,7 @@ def verse(things: list[Thing], killer: Thing, i):
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
-            "I don't know why she swallowed a %s - perhaps she'll die!"
-            % things[0].name,
+            things[0].spice,
         ]
 
     if i == 5:
@@ -66,14 +61,13 @@ def verse(things: list[Thing], killer: Thing, i):
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
-            "I don't know why she swallowed a %s - perhaps she'll die!"
-            % things[0].name,
+            things[0].spice,
         ]
 
     if i == 6:
         return [
             "There was an old lady who swallowed a %s..." % killer.name,
-            "...She's dead, of course!",
+            killer.spice,
         ]
 
 
@@ -86,7 +80,7 @@ def sequence(things, amount):
 
 killer = Thing("horse", "...She's dead, of course!")
 things_to_swollow = [
-    Thing("fly", "I don't know why she swalloed a fly - perhaps she'll die!"),
+    Thing("fly", "I don't know why she swallowed a fly - perhaps she'll die!"),
     Thing("spider", "That wriggled and wiggled and tickled inside her."),
     Thing("bird", "How absurd to swallow a bird."),
     Thing("cat", "Fancy that to swallow a cat!"),
