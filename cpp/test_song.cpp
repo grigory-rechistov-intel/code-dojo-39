@@ -52,3 +52,9 @@ TEST_F(TestSong, get_song_returns_classic_song) {
 
     EXPECT_EQ(res, classic_song);
 }
+
+TEST_F(TestSong, get_silly_song_returns_silly_song) {
+    const string res = get_silly_song();
+    const string silly_song("TODO collect me");
+    EXPECT_EQ(res, silly_song);
+}
