@@ -10,7 +10,7 @@ def verse(things, i):
             "There was an old lady who swallowed a %s;" % things[i],
             "That wriggled and wiggled and tickled inside her.",
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
-            "I don't know why she swallowed a %s - perhaps she'll die!" % "fly"
+            "I don't know why she swallowed a %s - perhaps she'll die!" % things[0]
         ]
 
     if i == 2:
@@ -19,7 +19,7 @@ def verse(things, i):
             "How absurd to swallow a %s." % things[i],
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
-            "I don't know why she swallowed a %s - perhaps she'll die!" % "fly"
+            "I don't know why she swallowed a %s - perhaps she'll die!" % things[0]
         ]
 
     if i == 3:
@@ -29,7 +29,7 @@ def verse(things, i):
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
-            "I don't know why she swallowed a fly - perhaps she'll die!",
+            "I don't know why she swallowed a %s - perhaps she'll die!" % things[0],
         ]
 
     if i == 4:
@@ -40,7 +40,7 @@ def verse(things, i):
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
-            "I don't know why she swallowed a %s - perhaps she'll die!" % "fly",
+            "I don't know why she swallowed a %s - perhaps she'll die!" % things[0],
         ]
 
     if i == 5:
@@ -52,7 +52,7 @@ def verse(things, i):
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
-            "I don't know why she swallowed a %s - perhaps she'll die!" % "fly",
+            "I don't know why she swallowed a %s - perhaps she'll die!" % things[0]
         ]
 
     if i == 6:
