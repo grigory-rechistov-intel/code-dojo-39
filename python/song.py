@@ -63,7 +63,7 @@ def verse(things, i):
 
 def sequence(things, amount):
     text = ""
-    for (first, second) in zip(things[:amount], things[1:amount]):
+    for (first, second) in zip(things[:amount+1], things[1:amount+1]):
         text += "She swallowed the %s to catch the %s,\n" % (first, second)
     return text
 

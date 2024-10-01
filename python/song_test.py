@@ -51,11 +51,11 @@ class Test(unittest.TestCase):
 class TestSequence(unittest.TestCase):
     def test_sequence_of_none(self):
         things = ("1", "2")
-        self.assertEqual("", sequence(things, 1))
+        self.assertEqual("", sequence(things, 0))
 
     def test_sequence_of_one(self):
         things = ("1", "2")
-        self.assertEqual("She swallowed the 1 to catch the 2,\n", sequence(things, 2))
+        self.assertEqual("She swallowed the 1 to catch the 2,\n", sequence(things, 1))
 
 if __name__ == '__main__':
     unittest.main()
