@@ -7,16 +7,20 @@ class Thing:
     spice: str
 
 
+def intro(thing: Thing) -> str:
+    return f"There was an old lady who swallowed a {thing.name}"
+
+
 def verse(things: list[Thing], killer: Thing, i):
     if i == 0:
         return [
-            "There was an old lady who swallowed a %s." % things[i].name,
+            intro(things[i]) + ".",
             things[i].spice,
         ]
 
     if i == 1:
         return [
-            "There was an old lady who swallowed a %s;" % things[i].name,
+            intro(things[i]) + ";",
             "That wriggled and wiggled and tickled inside her.",
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
             things[0].spice,
@@ -24,7 +28,7 @@ def verse(things: list[Thing], killer: Thing, i):
 
     if i == 2:
         return [
-            "There was an old lady who swallowed a %s;" % things[i].name,
+            intro(things[i]) + ";",
             "How absurd to swallow a %s." % things[i].name,
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
@@ -33,7 +37,7 @@ def verse(things: list[Thing], killer: Thing, i):
 
     if i == 3:
         return [
-            "There was an old lady who swallowed a %s;" % things[i].name,
+            intro(things[i]) + ";",
             "Fancy that to swallow a %s!" % things[i].name,
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
@@ -43,7 +47,7 @@ def verse(things: list[Thing], killer: Thing, i):
 
     if i == 4:
         return [
-            "There was an old lady who swallowed a %s;" % things[i].name,
+            intro(things[i]) + ";",
             "What a hog, to swallow a %s!" % things[i].name,
             "She swallowed the %s to catch the %s," % ("dog", "cat"),
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
@@ -54,7 +58,7 @@ def verse(things: list[Thing], killer: Thing, i):
 
     if i == 5:
         return [
-            "There was an old lady who swallowed a %s;" % things[i].name,
+            intro(things[i]) + ";",
             "I don't know how she swallowed a %s!" % things[i].name,
             "She swallowed the %s to catch the %s," % ("cow", "dog"),
             "She swallowed the %s to catch the %s," % ("dog", "cat"),
@@ -66,7 +70,7 @@ def verse(things: list[Thing], killer: Thing, i):
 
     if i == 6:
         return [
-            "There was an old lady who swallowed a %s..." % killer.name,
+            intro(killer) + "...",
             killer.spice,
         ]
 
