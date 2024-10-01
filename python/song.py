@@ -11,7 +11,7 @@ def intro(thing: Thing) -> str:
     return f"There was an old lady who swallowed a {thing.name}"
 
 
-def verse(things: list[Thing], killer: Thing, i):
+def verse(things: list[Thing], i):
     if i == 0:
         return [
             intro(things[i]) + ".",
@@ -28,8 +28,8 @@ def verse(things: list[Thing], killer: Thing, i):
 
     if i == 6:
         return [
-            intro(killer) + "...",
-            killer.spice,
+            intro(things[i]) + "...",
+            things[i].spice,
         ]
 
 
@@ -46,7 +46,6 @@ def sequence(things, amount):
     return ",\n".join(text)
 
 
-killer = Thing("horse", "...She's dead, of course!")
 things_to_swallow = [
     Thing("fly", "I don't know why she swallowed a fly - perhaps she'll die!"),
     Thing("spider", "That wriggled and wiggled and tickled inside her."),
@@ -54,18 +53,17 @@ things_to_swallow = [
     Thing("cat", "Fancy that to swallow a cat!"),
     Thing("dog", "What a hog, to swallow a dog!"),
     Thing("cow", "I don't know how she swallowed a cow!"),
+    Thing("horse", "...She's dead, of course!"),
 ]
 
 
-def song():
-    verses = []
-    for i in range(0, 7):
-        verses.append("\n".join(verse(things_to_swallow, killer, i)))
-    return "\n\n".join(verses)
-
-
 def lyrics():
-    return song()
+    verses = []
+    for i in range(0, len(things_to_swallow)):
+        next_verse = verse(things_to_swallow, i)
+        print(next_verse)
+        verses.append("\n".join(next_verse))
+    return "\n\n".join(verses)
 
 
 def main():
