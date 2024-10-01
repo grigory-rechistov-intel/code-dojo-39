@@ -1,77 +1,78 @@
 #include "lib.h"
 #include <vector>
 #include <format>
+using std::string;
+using std::format;
 
 class Animal;
-class Song;
 using Sequence = std::vector<Animal *>;
 
 class Animal {
     protected:
-    std::string name;
-    std::string intro_punctuation;
+    string name;
+    string intro_punctuation;
     public:
     virtual ~Animal() {};
-    const std::string get_name() const {return name;}
+    const string get_name() const {return name;}
     Animal() = delete;
-    Animal(const std::string _name) {
+    Animal(const string _name) {
         name = _name;
         intro_punctuation = ";";
     }
-    virtual const std::string verse_intro() {
-        const std::string lady_intro = "There was an old lady who swallowed";
-        std::string res = std::format("{} a {}", lady_intro, name);
+    virtual const string verse_intro() {
+        const string lady_intro = "There was an old lady who swallowed";
+        string res = format("{} a {}", lady_intro, name);
         return res + intro_punctuation + '\n';
     }
-    virtual const std::string verse_comment() = 0;
-    virtual const std::string verse_conclusion() = 0;
-    virtual const std::string reason_to_swallow(const Animal *prey) = 0;
-    virtual const std::string separator() {return ",\n";}
-    virtual const std::string swallow_sequence(const Sequence animals, size_t depth) = 0;
+    virtual const string verse_comment() = 0;
+    virtual const string verse_conclusion() = 0;
+    virtual const string reason_to_swallow(const Animal *prey) = 0;
+    virtual const string separator() {return ",\n";}
+    virtual const string swallow_sequence(const Sequence animals, size_t depth) = 0;
 };
 
 
 class StartingAnimal: public Animal {
     public:
-    StartingAnimal(const std::string _name): Animal(_name) {
+    StartingAnimal(const string _name): Animal(_name) {
         intro_punctuation = ".";
     }
-    virtual const std::string verse_comment() {
+    virtual const string verse_comment() {
         return "";
     }
-    virtual const std::string verse_conclusion() {
+    virtual const string verse_conclusion() {
         return "";
     }
-    virtual const std::string reason_to_swallow(const Animal *prey) {
-        return std::format(
+    virtual const string reason_to_swallow(const Animal *prey) {
+        return format(
             "I don't know why she swallowed a {} - perhaps she'll die!\n",
                 name);
     }
-    virtual const std::string separator() {return ";\n";};
+    virtual const string separator() {return ";\n";};
 
-    virtual const std::string swallow_sequence(const Sequence animals, size_t depth) {
+    virtual const string swallow_sequence(const Sequence animals, size_t depth) {
         return reason_to_swallow(nullptr);
     }
 };
 
 class RescueAnimal: public Animal {
-    std::string comment;
+    string comment;
     public:
-    RescueAnimal(const std::string _name, const std::string _comment):
+    RescueAnimal(const string _name, const string _comment):
         Animal(_name), comment(_comment) {}
-    virtual const std::string verse_comment() {
+    virtual const string verse_comment() {
         return comment;
     }
-    virtual const std::string verse_conclusion() {
+    virtual const string verse_conclusion() {
         return "";
     }
-    virtual const std::string reason_to_swallow(const Animal *prey) {
-        return std::format("She swallowed the {} to catch the {}", name, prey->get_name());
+    virtual const string reason_to_swallow(const Animal *prey) {
+        return format("She swallowed the {} to catch the {}", name, prey->get_name());
     }
-    virtual const std::string swallow_sequence(const Sequence animals, size_t depth) {
+    virtual const string swallow_sequence(const Sequence animals, size_t depth) {
         auto prey = depth > 0? animals.at(depth - 1): nullptr;
         auto line = reason_to_swallow(prey);
-        std::string separator = prey->separator();
+        string separator = prey->separator();
         return line + separator + prey->swallow_sequence(animals, depth-1);
     }
 
@@ -79,40 +80,40 @@ class RescueAnimal: public Animal {
 
 class LethalAnimal: public Animal {
     public:
-    LethalAnimal(const std::string _name): Animal(_name) {
+    LethalAnimal(const string _name): Animal(_name) {
         intro_punctuation = "...";
     }
-    virtual const std::string verse_comment() {
+    virtual const string verse_comment() {
         return "";
     }
-    virtual const std::string verse_conclusion() {
+    virtual const string verse_conclusion() {
         return "...She's dead, of course!";
     }
-    virtual const std::string reason_to_swallow(const Animal *prey) {
+    virtual const string reason_to_swallow(const Animal *prey) {
         return "";
     }
-    virtual const std::string swallow_sequence(const Sequence animals, size_t depth) {
+    virtual const string swallow_sequence(const Sequence animals, size_t depth) {
         return reason_to_swallow(nullptr);
     }
 };
 
 class NullAnimal: public Animal {
     public:
-    NullAnimal(const std::string _name): Animal(_name) {}
-    virtual const std::string verse_intro() {
+    NullAnimal(const string _name): Animal(_name) {}
+    virtual const string verse_intro() {
         return "";
     }
-    virtual const std::string verse_comment() {
+    virtual const string verse_comment() {
         return "";
     }
-    virtual const std::string verse_conclusion() {
+    virtual const string verse_conclusion() {
         return "";
     }
-    virtual const std::string reason_to_swallow(const Animal *prey) {
+    virtual const string reason_to_swallow(const Animal *prey) {
         return "";
     }
-    virtual const std::string separator() {return "";};
-    virtual const std::string swallow_sequence(const Sequence animals, size_t depth) {
+    virtual const string separator() {return "";};
+    virtual const string swallow_sequence(const Sequence animals, size_t depth) {
         return "";
     }
 };
@@ -136,7 +137,7 @@ class Song {
         return animals.at(n);
     }
 
-    const std::string get_verse(size_t n)
+    const string get_verse(size_t n)
     {
         auto animal = get_animal(animals, n);
         auto verse = animal->verse_intro() + animal->verse_comment() +
@@ -145,7 +146,7 @@ class Song {
         return verse;
     }
 
-    const std::string get_continuation(size_t starting_verse)
+    const string get_continuation(size_t starting_verse)
     {
         auto verse = get_verse(starting_verse);
         if (verse.size() == 0) {
@@ -167,7 +168,7 @@ Song make_classic_sequence() {
     return Song({fly, spider, bird, cat, dog, cow, horse});
 }
 
-const std::string chop_final_newline(std::string in)
+const string chop_final_newline(string in)
 {
     if (in.back() == '\n') {
         in.pop_back();
@@ -175,13 +176,13 @@ const std::string chop_final_newline(std::string in)
     return in;
 }
 
-const std::string get_song()
+const string get_song()
 {
     auto classic_song = make_classic_sequence();
     return chop_final_newline(classic_song.get_continuation(0));
 }
 
-const std::string get_silly_song()
+const string get_silly_song()
 {
     auto bug = new StartingAnimal("bug");
     auto slug = new RescueAnimal("slug", "It hid in her mug.\n");
