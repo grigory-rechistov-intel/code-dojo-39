@@ -1,5 +1,5 @@
 import unittest
-from song import lyrics
+from song import lyrics, sequence
 
 expected_song = """There was an old lady who swallowed a fly.
 I don't know why she swallowed a fly - perhaps she'll die!
@@ -47,6 +47,10 @@ class Test(unittest.TestCase):
         self.maxDiff=5000
         self.assertEqual(lyrics().split("\n"), expected_song.split("\n"))
 
+
+class TestSequence(unittest.TestCase):
+    def test_sequence_of_none(self):
+        self.assertEqual("", sequence([], 0))
 
 if __name__ == '__main__':
     unittest.main()
