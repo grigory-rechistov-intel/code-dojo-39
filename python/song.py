@@ -74,8 +74,10 @@ def verse(things: list[Thing], killer: Thing, i):
 def sequence(things, amount):
     things = list(reversed(things))
     text = []
-    for first, second in zip(things[:amount + 1], things[1 : amount + 1]):
-        text.append("She swallowed the %s to catch the %s" % (first.name, second.name))
+    for first, second in zip(things[: amount + 1], things[1 : amount + 1]):
+        text.append(
+            "She swallowed the %s to catch the %s" % (first.name, second.name)
+        )
     return ",\n".join(text)
 
 
