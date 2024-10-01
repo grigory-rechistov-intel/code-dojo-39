@@ -27,6 +27,13 @@ def middle_verse(things: list[Thing], i: int) -> list[str]:
     ]
 
 
+def last_verse(things: list[Thing]) -> list[str]:
+    return [
+        intro(things[-1]) + "...",
+        things[-1].spice,
+    ]
+
+
 def verse(things: list[Thing], i):
     if i == 0:
         return first_verse(things)
@@ -35,10 +42,7 @@ def verse(things: list[Thing], i):
         return middle_verse(things, i)
 
     if i == len(things) - 1:
-        return [
-            intro(things[i]) + "...",
-            things[i].spice,
-        ]
+        return last_verse(things)
 
 
 def sequence(things, amount):
@@ -47,7 +51,7 @@ def sequence(things, amount):
 
     things = list(reversed(things))
     text = []
-    for first, second in zip(things[-amount-1:], things[-amount:]):
+    for first, second in zip(things[-amount - 1 :], things[-amount:]):
         text.append(
             "She swallowed the %s to catch the %s" % (first.name, second.name)
         )
