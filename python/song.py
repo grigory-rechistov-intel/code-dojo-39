@@ -18,7 +18,7 @@ def verse(things: list[Thing], i):
             things[i].spice,
         ]
 
-    if 1 <= i < 6:
+    if 1 <= i < len(things) - 1:
         return [
             intro(things[i]) + ";",
             things[i].spice,
