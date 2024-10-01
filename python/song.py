@@ -4,7 +4,7 @@ from dataclasses import dataclass
 @dataclass
 class Thing:
     name: str
-    spice: str
+    rhyme: str
 
 
 def intro(thing: Thing) -> str:
@@ -14,23 +14,23 @@ def intro(thing: Thing) -> str:
 def first_verse(things: list[Thing]) -> list[str]:
     return [
         intro(things[0]) + ".",
-        things[0].spice,
+        things[0].rhyme,
     ]
 
 
 def middle_verse(things: list[Thing], i: int) -> list[str]:
     return [
         intro(things[i]) + ";",
-        things[i].spice,
+        things[i].rhyme,
         sequence(things, amount=i) + ";",
-        things[0].spice,
+        things[0].rhyme,
     ]
 
 
 def last_verse(things: list[Thing]) -> list[str]:
     return [
         intro(things[-1]) + "...",
-        things[-1].spice,
+        things[-1].rhyme,
     ]
 
 
