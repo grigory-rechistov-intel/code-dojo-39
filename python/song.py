@@ -22,7 +22,7 @@ def verse(things: list[Thing], killer: Thing, i):
         return [
             intro(things[i]) + ";",
             things[i].spice,
-            "She swallowed the %s to catch the %s;" % ("spider", "fly"),
+            sequence(things, amount=i) + ";",
             things[0].spice,
         ]
 
