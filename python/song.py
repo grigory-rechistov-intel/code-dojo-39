@@ -11,6 +11,13 @@ def intro(thing: Thing) -> str:
     return f"There was an old lady who swallowed a {thing.name}"
 
 
+def first_verse(things: list[Thing]) -> list[str]:
+    return [
+        intro(things[0]) + ".",
+        things[0].spice,
+    ]
+
+
 def middle_verse(things: list[Thing], i: int) -> list[str]:
     return [
         intro(things[i]) + ";",
@@ -22,10 +29,7 @@ def middle_verse(things: list[Thing], i: int) -> list[str]:
 
 def verse(things: list[Thing], i):
     if i == 0:
-        return [
-            intro(things[i]) + ".",
-            things[i].spice,
-        ]
+        return first_verse(things)
 
     if 1 <= i < len(things) - 1:
         return middle_verse(things, i)
