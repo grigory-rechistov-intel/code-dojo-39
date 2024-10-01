@@ -18,39 +18,7 @@ def verse(things: list[Thing], killer: Thing, i):
             things[i].spice,
         ]
 
-    if i == 1:
-        return [
-            intro(things[i]) + ";",
-            things[i].spice,
-            sequence(things, amount=i) + ";",
-            things[0].spice,
-        ]
-
-    if i == 2:
-        return [
-            intro(things[i]) + ";",
-            things[i].spice,
-            sequence(things, amount=i) + ";",
-            things[0].spice,
-        ]
-
-    if i == 3:
-        return [
-            intro(things[i]) + ";",
-            things[i].spice,
-            sequence(things, amount=i) + ";",
-            things[0].spice,
-        ]
-
-    if i == 4:
-        return [
-            intro(things[i]) + ";",
-            things[i].spice,
-            sequence(things, amount=i) + ";",
-            things[0].spice,
-        ]
-
-    if i == 5:
+    if 1 <= i < 6:
         return [
             intro(things[i]) + ";",
             things[i].spice,
