@@ -1,5 +1,5 @@
 import unittest
-from song import lyrics, sequence
+from song import Thing, lyrics, sequence
 
 expected_song = """There was an old lady who swallowed a fly.
 I don't know why she swallowed a fly - perhaps she'll die!
@@ -54,8 +54,15 @@ class TestSequence(unittest.TestCase):
         self.assertEqual("", sequence(things, 0))
 
     def test_sequence_of_one(self):
-        things = ("1", "2")
-        self.assertEqual("She swallowed the 2 to catch the 1,\n", sequence(things, 1))
+        things = (Thing("1", "spice1"), Thing("2", "spice2"))
+        self.assertEqual("She swallowed the 2 to catch the 1,", sequence(things, 1))
+    
+    def test_sequence_of_two(self):
+        things = (Thing("1", "spice1"), Thing("2", "spice2"), Thing("3", "spice3"))
+        self.assertEqual([
+            "She swallowed the 3 to catch the 2,",
+            "She swallowed the 2 to catch the 1,",
+        ], sequence(things, 2).split("\n"))
 
 if __name__ == '__main__':
     unittest.main()
