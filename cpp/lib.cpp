@@ -175,3 +175,13 @@ const std::string get_song()
     return chop_final_newline(get_continuation(classic_sequence, 0));
     delete_sequence(classic_sequence);
 }
+
+const std::string get_silly_song()
+{
+    auto bug = StartingAnimal("bug");
+    auto slug = RescueAnimal("slug", "It hid in her mug.\n");
+    auto crocodile = LethalAnimal("crocodile");
+    Sequence silly = {&bug, &slug, &crocodile};
+    return(get_continuation(silly, 0));
+
+}
