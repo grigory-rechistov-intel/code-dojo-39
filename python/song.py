@@ -9,7 +9,7 @@ def verse(i):
         return [
             "There was an old lady who swallowed a %s;" % "spider",
             "That wriggled and wiggled and tickled inside her.",
-            "She swallowed the spider to catch the %s;" % "fly",
+            "She swallowed the %s to catch the %s;" % ("spider", "fly"),
             "I don't know why she swallowed a %s - perhaps she'll die!" % "fly"
         ]
 
@@ -24,7 +24,7 @@ def verse(i):
 
     if i == 3:
         return [
-            "There was an old lady who swallowed a cat;",
+            "There was an old lady who swallowed a %s;" % "cat",
             "Fancy that to swallow a %s!" % "cat",
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
