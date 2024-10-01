@@ -44,8 +44,9 @@ There was an old lady who swallowed a horse...
 
 class Test(unittest.TestCase):
     def test_characterization(self):
-      self.maxDiff=5000
-      self.assertEqual(lyrics().split("\n"), expected_song.split("\n"))
+        self.maxDiff=5000
+        self.assertEqual(lyrics().split("\n"), expected_song.split("\n"))
+
 
 if __name__ == '__main__':
     unittest.main()
