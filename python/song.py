@@ -36,10 +36,10 @@ def verse(i):
         return [
             "There was an old lady who swallowed a dog;",
             "What a hog, to swallow a dog!",
-            "She swallowed the dog to catch the cat,",
-            "She swallowed the cat to catch the bird,",
-            "She swallowed the bird to catch the spider,",
-            "She swallowed the spider to catch the fly;",
+            "She swallowed the %s to catch the %s," % ("dog", "cat"),
+            "She swallowed the %s to catch the %s," % ("cat", "bird"),
+            "She swallowed the %s to catch the %s," % ("bird", "spider"),
+            "She swallowed the %s to catch the %s;" % ("spider", "fly"),
             "I don't know why she swallowed a fly - perhaps she'll die!",
         ]
 
