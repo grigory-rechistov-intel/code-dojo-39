@@ -60,9 +60,7 @@ things_to_swallow = [
 def lyrics():
     verses = []
     for i in range(0, len(things_to_swallow)):
-        next_verse = verse(things_to_swallow, i)
-        print(next_verse)
-        verses.append("\n".join(next_verse))
+        verses.append("\n".join(verse(things_to_swallow, i)))
     return "\n\n".join(verses)
 
 
