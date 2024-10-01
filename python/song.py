@@ -25,7 +25,7 @@ def verse(things, i):
     if i == 3:
         return [
             "There was an old lady who swallowed a %s;" % things[i],
-            "Fancy that to swallow a %s!" % "cat",
+            "Fancy that to swallow a %s!" % things[i],
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
@@ -34,8 +34,8 @@ def verse(things, i):
 
     if i == 4:
         return [
-            "There was an old lady who swallowed a %s;" % "dog",
-            "What a hog, to swallow a %s!" % "dog",
+            "There was an old lady who swallowed a %s;" % things[i],
+            "What a hog, to swallow a %s!" % things[i],
             "She swallowed the %s to catch the %s," % ("dog", "cat"),
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
@@ -45,8 +45,8 @@ def verse(things, i):
 
     if i == 5:
         return [
-            "There was an old lady who swallowed a %s;" % "cow",
-            "I don't know how she swallowed a %s!" % "cow",
+            "There was an old lady who swallowed a %s;" % things[i],
+            "I don't know how she swallowed a %s!" % things[i],
             "She swallowed the %s to catch the %s," % ("cow", "dog"),
             "She swallowed the %s to catch the %s," % ("dog", "cat"),
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
@@ -57,7 +57,7 @@ def verse(things, i):
 
     if i == 6:
         return [
-            "There was an old lady who swallowed a %s..." % "horse",
+            "There was an old lady who swallowed a %s..." % things[i],
             "...She's dead, of course!",
         ]
 
