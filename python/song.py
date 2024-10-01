@@ -61,6 +61,9 @@ def verse(things, i):
             "...She's dead, of course!",
         ]
 
+def sequence(things, amount):
+    for (first, second) in zip(things[:amount], things[1:amount]):
+        "She swallowed the %s to catch the %s," % (second, first),
 
 def song():
     things_to_swollow = ["fly", "spider", "bird", "cat", "dog", "cow", "horse"]
