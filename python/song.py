@@ -60,11 +60,7 @@ def verse(things: list[Thing], killer: Thing, i):
         return [
             intro(things[i]) + ";",
             things[i].spice,
-            "She swallowed the %s to catch the %s," % ("cow", "dog"),
-            "She swallowed the %s to catch the %s," % ("dog", "cat"),
-            "She swallowed the %s to catch the %s," % ("cat", "bird"),
-            "She swallowed the %s to catch the %s," % ("bird", "spider"),
-            "She swallowed the %s to catch the %s;" % ("spider", "fly"),
+            sequence(things, amount=i) + ";",
             things[0].spice,
         ]
 
@@ -79,8 +75,8 @@ def sequence(things, amount):
     things = list(reversed(things))
     text = []
     for first, second in zip(things[:amount + 1], things[1 : amount + 1]):
-        text.append("She swallowed the %s to catch the %s," % (first.name, second.name))
-    return "\n".join(text)
+        text.append("She swallowed the %s to catch the %s" % (first.name, second.name))
+    return ",\n".join(text)
 
 
 killer = Thing("horse", "...She's dead, of course!")
