@@ -55,6 +55,12 @@ TEST_F(TestSong, get_song_returns_classic_song) {
 
 TEST_F(TestSong, get_silly_song_returns_silly_song) {
     const string res = get_silly_song();
-    const string silly_song("TODO collect me");
+    const string silly_song("There was an old lady who swallowed a bug.\n"
+        "I don't know why she swallowed a bug - perhaps she'll die!\n\n"
+        "There was an old lady who swallowed a slug;\nIt hid in her mug.\n"
+        "She swallowed the slug to catch the bug;\n"
+        "I don't know why she swallowed a bug - perhaps she'll die!\n\n"
+        "There was an old lady who swallowed a crocodile...\n"
+        "...She's dead, of course!\n");
     EXPECT_EQ(res, silly_song);
 }
