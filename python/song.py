@@ -64,7 +64,7 @@ def verse(things, i):
 def sequence(things, amount):
     text = ""
     for (first, second) in zip(things[:amount], things[1:amount]):
-        "She swallowed the %s to catch the %s," % (second, first),
+        text += "She swallowed the %s to catch the %s,\n" % (first, second)
     return text
 
 def song():
