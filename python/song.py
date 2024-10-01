@@ -26,7 +26,7 @@ def verse(things: list[Thing], i):
             things[0].spice,
         ]
 
-    if i == 6:
+    if i == len(things) - 1:
         return [
             intro(things[i]) + "...",
             things[i].spice,
