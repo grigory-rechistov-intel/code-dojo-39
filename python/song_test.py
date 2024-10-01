@@ -42,9 +42,8 @@ I don't know why she swallowed a fly - perhaps she'll die!
 There was an old lady who swallowed a horse...
 ...She's dead, of course!"""
 
-class TestStringMethods(unittest.TestCase):
-
-    def test_upper(self):
+class Test(unittest.TestCase):
+    def test_characterization(self):
       self.maxDiff=5000
       self.assertEqual(lyrics().split("\n"), expected_song.split("\n"))
 
