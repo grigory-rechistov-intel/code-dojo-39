@@ -1,13 +1,13 @@
-def verse(i):
+def verse(things, i):
     if i == 0:
         return [
-            "There was an old lady who swallowed a %s." % "fly",
-            "I don't know why she swallowed a %s - perhaps she'll die!" % "fly",
+            "There was an old lady who swallowed a %s." % things[i],
+            "I don't know why she swallowed a %s - perhaps she'll die!" % things[i],
         ]
 
     if i == 1:
         return [
-            "There was an old lady who swallowed a %s;" % "spider",
+            "There was an old lady who swallowed a %s;" % things[i],
             "That wriggled and wiggled and tickled inside her.",
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
             "I don't know why she swallowed a %s - perhaps she'll die!" % "fly"
@@ -15,8 +15,8 @@ def verse(i):
 
     if i == 2:
         return [
-            "There was an old lady who swallowed a %s;" % "bird",
-            "How absurd to swallow a %s." % "bird",
+            "There was an old lady who swallowed a %s;" % things[i],
+            "How absurd to swallow a %s." % things[i],
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
             "She swallowed the %s to catch the %s;" % ("spider", "fly"),
             "I don't know why she swallowed a %s - perhaps she'll die!" % "fly"
@@ -24,7 +24,7 @@ def verse(i):
 
     if i == 3:
         return [
-            "There was an old lady who swallowed a %s;" % "cat",
+            "There was an old lady who swallowed a %s;" % things[i],
             "Fancy that to swallow a %s!" % "cat",
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
@@ -63,9 +63,10 @@ def verse(i):
 
 
 def song():
+    things_to_swollow = ["fly", "spider", "bird", "cat", "dog", "cow", "horse"]
     verses = []
     for i in range(0,7):
-        verses.append("\n".join(verse(i)))
+        verses.append("\n".join(verse(things_to_swollow, i)))
     return "\n\n".join(verses)
 
 def lyrics():
