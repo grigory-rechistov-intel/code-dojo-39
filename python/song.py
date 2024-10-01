@@ -35,7 +35,7 @@ def verse(i):
     if i == 4:
         return [
             "There was an old lady who swallowed a %s;" % "dog",
-            "What a hog, to swallow a dog!",
+            "What a hog, to swallow a %s!" % "dog",
             "She swallowed the %s to catch the %s," % ("dog", "cat"),
             "She swallowed the %s to catch the %s," % ("cat", "bird"),
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
