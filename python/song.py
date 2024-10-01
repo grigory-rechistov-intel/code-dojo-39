@@ -72,9 +72,12 @@ def verse(things: list[Thing], killer: Thing, i):
 
 
 def sequence(things, amount):
+    if amount == 0:
+        return ""
+
     things = list(reversed(things))
     text = []
-    for first, second in zip(things[: amount + 1], things[1 : amount + 1]):
+    for first, second in zip(things[-amount-1:], things[-amount:]):
         text.append(
             "She swallowed the %s to catch the %s" % (first.name, second.name)
         )
