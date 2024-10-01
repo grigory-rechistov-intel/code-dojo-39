@@ -120,6 +120,7 @@ class NullAnimal: public Animal {
 
 class Song {
     Sequence animals;
+    NullAnimal no_animal = NullAnimal("");
     public:
     Song() = delete;
     Song(Sequence _animals): animals(_animals) {};
@@ -130,9 +131,8 @@ class Song {
     }
 
     Animal * get_animal(Sequence &animals, size_t n) {
-        static auto na = NullAnimal("");
         if (n >= animals.size()) {
-            return &na;
+            return &no_animal;
         }
         return animals.at(n);
     }
