@@ -3,6 +3,7 @@
 #include <format>
 
 class Animal;
+class Song;
 using Sequence = std::vector<Animal *>;
 
 class Animal {
@@ -95,7 +96,6 @@ class LethalAnimal: public Animal {
     }
 };
 
-
 class NullAnimal: public Animal {
     public:
     NullAnimal(const std::string _name): Animal(_name) {}
@@ -115,6 +115,45 @@ class NullAnimal: public Animal {
     virtual const std::string swallow_sequence(const Sequence animals, size_t depth) {
         return "";
     }
+};
+
+class Song {
+    Sequence animals;
+    public:
+    Song() = delete;
+    Song(Sequence _animals): animals(_animals) {};
+    ~Song() {
+        for (Animal *a: animals) {
+            delete a;
+        }
+    }
+
+    Animal * get_animal(Sequence &animals, size_t n) {
+        static auto na = NullAnimal("");
+        if (n >= animals.size()) {
+            return &na;
+        }
+        return animals.at(n);
+    }
+
+    const std::string get_verse(size_t n)
+    {
+        auto animal = get_animal(animals, n);
+        auto verse = animal->verse_intro() + animal->verse_comment() +
+            animal->swallow_sequence(animals, n) + animal->verse_conclusion();
+
+        return verse;
+    }
+
+    const std::string get_continuation(size_t starting_verse)
+    {
+        auto verse = get_verse(starting_verse);
+        if (verse.size() == 0) {
+            return verse;
+        }
+        return verse + "\n" + get_continuation(starting_verse + 1);
+    }
+
 };
 
 Animal *
@@ -183,5 +222,4 @@ const std::string get_silly_song()
     auto crocodile = LethalAnimal("crocodile");
     Sequence silly = {&bug, &slug, &crocodile};
     return(get_continuation(silly, 0));
-
 }
