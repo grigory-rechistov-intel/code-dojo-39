@@ -18,7 +18,7 @@ def verse(i):
             "There was an old lady who swallowed a %s;" % "bird",
             "How absurd to swallow a %s." % "bird",
             "She swallowed the %s to catch the %s," % ("bird", "spider"),
-            "She swallowed the spider to catch the %s;" % "fly",
+            "She swallowed the %s to catch the %s;" % ("spider", "fly"),
             "I don't know why she swallowed a %s - perhaps she'll die!" % "fly"
         ]
 
