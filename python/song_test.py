@@ -45,8 +45,8 @@ There was an old lady who swallowed a horse...
 class TestStringMethods(unittest.TestCase):
 
     def test_upper(self):
-      unittest.util._MAX_LENGTH=5000
-      self.assertEqual(lyrics(), expected_song)
+      self.maxDiff=5000
+      self.assertEqual(lyrics().split("\n"), expected_song.split("\n"))
 
 if __name__ == '__main__':
     unittest.main()
