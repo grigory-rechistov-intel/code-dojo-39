@@ -39,4 +39,8 @@ I don't know why she swallowed a fly - perhaps she'll die!
 There was an old lady who swallowed a horse...
 ...She's dead, of course!"""
 
-print(song)
+def main():
+  print(song)
+
+if __name__ == '__main__':
+  main()
